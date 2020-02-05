@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Vue</title>
+</head>
+
+<body>
+    <div id="app">
+        <input type="text" v-model="word">
+        <p>{{word}}</p>
+        <h1>{{ary.hello}}</h1>
+        <h2>{{ary.hello1.ka}}</h2>
+        <button v-on:click="sayHi">change model</button>
+    </div>
+    <script src="./study/Observer.js"></script>
+    <script src="./study/Watcher.js"></script>
+    <script src="./study/Compile.js"></script>
+    <script src="./study/Mvvm.js"></script>
+
+    <script>
+        let app = new Mvvm(
+            {
+                el: 'app',
+                data: {
+                    word: 'Hello World!',
+                    vue: 'react',
+                    ary: {
+                        hello: 'hello',
+                        hello1: {
+                            ka: 'ge'
+                        }
+                    }
+                },
+                methods: {
+                    sayHi: function () {
+                        this.word = 'hello react'
+                    }
+                }
+            }
+        );
+        
+        setTimeout(() => {
+            app.$data['word'] = 'hello vue';
+            app.$data['ary'].hello = 'hello World'
+        }, 1000);
+        app.$watch('word', function () {
+            console.log(arguments);
+        })
+
+
+    </script>
+</body>
+
+</html>
